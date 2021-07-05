@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Search Results</h2>
+    {% if posts|length < 1 %}
+
+    <p> No search results></p>
+      Your search query: <b></b> did not match any documents. <br>
+      Suggestions:
+      <ul>
+          <li>Make sure that all words are spelled correctly.</li>
+          <li>Try different keywords.</li>
+          <li>Try more general keywords.</li>
+      </ul>
+      
+    {% endif %}
+    
+    
+
+
+    <div class="row align-items-md-stretch">
+        {% for post in posts %}
+        <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2 class="text-warning">{{post.title}}</h2>
+                <p class="card-text text-muted h6">{{post.author}} | {{post.created_on}}</p>
+                <p>{{post.content|slice:"200"|safe}}</p>
+                <button class="btn btn-primary btn-lg" type="button"><a href="{{post.slug}}"
+                        style="text-decoration: none; color: white;">Read More</a></button>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <br>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+        © 2021
+    </footer>
+</div>
+{% endblock content %}
